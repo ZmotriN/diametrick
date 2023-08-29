@@ -1,0 +1,112 @@
+
+ul.mlist {
+    position: relative;
+    // border: 1px solid var(--text-shade);
+    // background-color: red;
+    list-style-type: none;
+    // padding: 6px;
+
+    li {
+        position: relative;
+        border: 1px solid var(--text-shade);
+        background-color: var(--background-gradient);
+        padding: 10px;
+        user-select: none;
+        line-height: 26px;
+        text-align: left;
+        font-weight: normal;
+
+        &:not(:last-child) {
+            margin-bottom: 8px;
+        }
+
+        &.unread {
+            div.trash,
+            div.reply {
+                display: none;
+            }
+        }
+    
+        &.unread::before {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            top: -10px;
+            left: -10px;
+            border-radius: 50%;
+            border: 1px solid var(--text-shade);
+            background-color: var(--highlight);
+            z-index: 999;
+        }
+
+        summary {
+            color: var(--text-highlight);
+            cursor: pointer;
+            &::after {
+                content: ' 📧';
+                float: right;
+            }
+        }
+
+        h3 {
+            font-size: 1em;
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            text-decoration: underline;
+
+            em {
+                font-weight: normal;
+            }
+        }
+
+        div.reply_body {
+            color: var(--text-shade);
+            border-left: 2px solid var(--text-shade);
+            padding-left: 8px;
+            margin-top: 8px;
+            em {
+                color: var(--text-shade);
+            }
+            
+        }
+    
+        .icons {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            text-align: right;
+            z-index: 9999;
+
+            .icon {
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                margin-left: 1px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                opacity: 0.5;
+                cursor: pointer;
+                vertical-align: middle;
+                &:hover {
+                    opacity: 1;
+                }
+
+                &.trash {
+                    background-image: var(--trash-icon);
+                }
+
+                &.reply {
+                    background-image: var(--reply-icon);
+                }
+
+            }
+
+        }
+
+
+    
+    }
+
+}

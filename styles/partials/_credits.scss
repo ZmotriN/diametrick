@@ -1,0 +1,64 @@
+body:has(.credits) {
+    overflow: hidden;
+}
+
+.credits {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    user-select: none;
+
+    &__anim {
+        font-size: 0;
+        width: 360px;
+        margin: auto;
+        
+        &__block {
+            display: inline-block;
+            margin: 2px;
+            width: 24px;
+            height: 24px;
+            animation-name: leds;
+            animation-duration: var(--blink-speed);
+            animation-iteration-count: infinite;
+            animation-delay: calc(0s - (var(--blink-speed) * var(--nb1)));
+        }
+
+        &:hover &__block {
+            rotate: calc(360deg * var(--nb4));
+            animation-name: leds_drop;
+            animation-timing-function: cubic-bezier(.7,-0.27,.66,.66);
+            animation-duration: calc((1s * var(--nb3)) + 2s);
+            animation-iteration-count: infinite;
+            animation-fill-mode: both;
+        }
+    }
+
+    h2 {
+        font-size: 31px;
+    }
+}
+
+@keyframes leds {
+    from { background-color: var(--blink-color); }
+    to { background-color: var(--highlight); }
+}
+
+@keyframes leds_drop {
+    0%, 100% {
+        background-color: var(--blink-color);
+        transform: translateX(0) scale(0.75);
+        opacity: 0.25;
+    }
+    60% {
+        transform: translateX(calc(50vmax * var(--nb2))) scale(2);
+        opacity: 1;
+    }
+    90% {
+        background-color: var(--highlight);
+    }
+}

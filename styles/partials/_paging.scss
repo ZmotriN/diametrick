@@ -1,0 +1,18 @@
+table.paging {
+    width: 100%;
+    margin: 6px 0;
+    user-select: none;
+
+    td:nth-child(1) {
+        width: 30%;
+        text-align: left;
+    }
+    td:nth-child(2) {
+        width: 40%;
+        text-align: center;
+    }
+    td:nth-child(3) {
+        width: 30%;
+        text-align: right;
+    }
+}

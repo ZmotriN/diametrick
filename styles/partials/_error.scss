@@ -1,0 +1,157 @@
+div.construction {
+    position: absolute;
+    width: 50vmin;
+    height: 50vmin;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    svg {
+        animation-name: shake;
+        animation-duration: 6ms;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: linear;
+        filter: blur(0.2vmin);
+
+        path.stripe {
+            fill:  var(--construction);
+        }
+
+    }
+
+
+
+
+}
+
+@keyframes shake {
+    from { transform: rotate(-1.5deg); }
+    to { transform: rotate(1.5deg); }
+}
+
+div.splash_container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    user-select: none;
+
+    div.splash {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--highlight-midblend);
+            border-radius: 50%;
+            opacity: 0.5;
+            filter: blur(100px);
+        }
+
+        &__title {
+            position: relative;
+            font-family: 'Kavoon', cursive;
+            font-size: 10vmin;
+            text-align: center;
+            color: var(--background-color);
+            // filter: drop-shadow(5px -5px 5px rgba(0,0,0,0.5));
+        }
+
+        &__legend {
+            position: relative;
+            padding-top: 18px;
+            font-size: 5vmin;
+            text-align: center;
+            font-family: 'Kavoon', cursive;
+
+            a {
+                color: var(--background-color);
+                background: none;
+
+                &:hover {
+                    // -webkit-text-stroke: 2px var(--highlight-blend);
+                    filter: drop-shadow(0px 0px 10px var(--highlight));
+                }
+            }
+        }
+
+        &__contents {
+            position: relative;
+            height: 50vmin;
+            margin: auto;
+            // background-color: blue;
+            text-align: center;
+        }
+
+
+    }
+}
+
+svg.shrug, svg.maintenance {
+    position: relative;
+    height: 100%;
+
+    path {
+        fill: var(--background-color);
+    }
+}
+
+.champ {
+    --marmotte-size: 15vmin;
+    display: grid;
+    grid-template-columns: repeat(4, var(--marmotte-size));
+    gap: 15px;
+
+    .trou-container {
+        position: relative;
+        overflow: hidden;
+
+        .trou {
+            display: relative;
+            width: var(--marmotte-size);
+            height: var(--marmotte-size);
+            overflow: hidden;
+            filter: drop-shadow(5px -5px 5px rgba(0,0,0,0.5));
+            
+            .terre {
+                z-index: 1;
+                position: absolute;
+                height: var(--marmotte-size);
+                width: var(--marmotte-size);
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            .marmotte {
+                z-index: 0;
+                position: absolute;
+                transform: translateY(100%);
+                width: var(--marmotte-size);
+                height: var(--marmotte-size);
+                background-size: contain;
+                background-repeat: no-repeat;
+                transition-duration: 150ms;
+                transition-property: transform;
+            }
+        }
+
+        &--out {
+            .trou {
+                .marmotte {
+                    transform: translateY(0%);
+                    transition-duration: 200ms;
+                }
+            }
+        }
+
+    }
+
+ }

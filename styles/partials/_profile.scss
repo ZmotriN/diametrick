@@ -1,0 +1,114 @@
+.profile_anim {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity visibility;
+    transition-duration: 200ms;
+    
+
+    // &::before {
+    //     content: '';
+    //     position: absolute;
+    //     width: 100%;
+    //     height: 100%;
+    //     top: 0;
+    //     left: 0;
+    //     opacity: 0.7;
+    //     background-color: var(--modal-color);
+    // }
+
+    &.hide {
+        .profile_anim__user {
+            display: none;
+        }
+    }
+
+    &.show {
+        visibility: visible;
+        opacity: 1;
+        transition-duration: 200ms;
+
+        .profile_anim__user {
+            filter: blur(0px);
+            opacity: 0.8;
+            svg {
+                
+                animation-name: profile_user_shrink;
+                animation-duration: 0.5s;
+                animation-timing-function: cubic-bezier(.37,-0.57,.42,.75);
+                animation-fill-mode: forwards;
+                animation-delay: 2s;
+
+                #character {
+                    transform-origin: center;
+                    animation-name: profile_user_spin;
+                    animation-duration: 1s;
+                    animation-timing-function: ease-in;
+                    animation-fill-mode: forwards;
+                    animation-delay: 1s;
+                    
+                }
+            }
+
+        }
+
+    }
+
+
+    &__user {
+        position: absolute;
+        width: 40vmin;
+        height: 40vmin;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        // display: none;
+        // left: 50%;
+        // top: -50vmin;
+        // transform: translateX(-50%);
+
+        transition-property: filter opacity;
+        transition-duration: 0.8s;
+
+        filter: blur(100px);
+        opacity: 0;
+
+        svg {
+            circle {
+                fill: var(--highlight);
+            }
+        }
+        
+    }
+}
+
+@keyframes profile_user_spin {
+    from {
+        transform: rotate(0deg) scale(1);
+        filter: blur(0vmin);
+    }
+    to {
+        transform: rotate(calc(6 * 360deg)) scale(0);
+        filter: blur(0.25vmin);
+    }
+}
+
+@keyframes profile_user_shrink {
+    from {
+        transform: scale(1);
+        filter: blur(0px);
+    }
+
+    to {
+        transform: scale(0);
+        filter: blur(50px);
+    }
+    
+}

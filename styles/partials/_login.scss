@@ -1,0 +1,65 @@
+div.login_container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    user-select: none;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 90vw;
+        height: 90vh;
+        transform: translate(-50%, -50%);
+        background-image: var(--logo);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        filter: brightness(160%) invert(100%);
+        opacity: 0.05;
+    }
+
+
+    div.login_splash {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation-name: glowing-box;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+
+        input[type="email"], input[type="password"] {
+            width: 300px;
+            border: 1px solid var(--text-color);
+        }
+    }
+
+
+}
+
+table.form tr.login_msg {
+    display: none;
+    
+    &.show {
+        display: table-row;
+    }
+
+    td {
+        text-align: center;
+        color: var(--highlight);
+        font-weight: bold;
+    }
+}
+
+@keyframes glowing-box {
+    from {
+        box-shadow: 0 0 0vmin var(--highlight);
+    }
+    to {
+        box-shadow: 0 0 5vmin var(--highlight);
+    }
+}

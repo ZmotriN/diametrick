@@ -1,0 +1,39 @@
+div.home {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vmin;
+    aspect-ratio: 1/1;
+    
+    svg.gear {
+
+        path {
+            transform-origin: center;
+            animation-name: gear;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        path:nth-child(1) {
+            fill: var(--gear-out);
+            animation-duration: 60s;
+        }
+
+        path:nth-child(2) {
+            fill: var(--gear-mid);
+            animation-duration: 30s;
+        }
+
+        path:nth-child(3) {
+            fill: var(--gear-in);
+            animation-duration: 15s;
+        }
+    }
+
+}
+
+@keyframes gear {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

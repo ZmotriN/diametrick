@@ -1,0 +1,46 @@
+div.switch {
+    display: inline-block;
+    position: relative;
+    width: 68px;
+    height: 24px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid var(--highlight);
+    transition-property: background-color border;
+    transition-duration: var(--scheme-transition);
+
+    &__pin {
+        position: absolute;
+        top: 0;
+        width: 22px;
+        height: 22px;
+        background-color: #c2190e;
+        border-radius: 50%;
+        transition-property: background-color transform;
+        transition-duration: var(--scheme-transition);
+    }
+
+    &.light {
+        background-color: black;
+
+        .switch__pin {
+            transform: translateX(200%);
+            background-color: #3b9abe;
+        }
+
+    }
+
+
+
+}
+
+// div.light.switch {
+//     background-color: white;
+
+//     &__pin {
+//         right: 0;
+//     }
+// }
