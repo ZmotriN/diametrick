@@ -104,7 +104,7 @@ new PageApp([
     new Page([
         'path'   => '',
         'name'   => 'Accueil',
-        'title'  => 'Générateur de questionnaires',
+        'title'  => TITLE,
         'file'   => 'home.php',
         'menu'   => true,
         'access' => ['dev', 'admin', 'concealer', 'editor'],
