@@ -180,4 +180,4 @@ new PageApp([
         'access' => ['dev', 'admin', 'concealer', 'editor'],
     ]),
 
-], GEHGen::getLoggedUser());
+], SYS::getLoggedUser());

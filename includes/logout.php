@@ -1,2 +1,2 @@
 <?php
-GEHGen::logout($this->root);
+SYS::logout($this->root);

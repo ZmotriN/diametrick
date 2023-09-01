@@ -58,7 +58,7 @@ class Quiz implements JsonSerializable {
             for($i = 1; !$this->verifyName($this->name.' ('.$i.')'); $i++);
             $this->name = $this->name.' ('.$i.')';
         }
-        $this->user_id = GEHGen::getLoggedUser()->id;
+        $this->user_id = SYS::getLoggedUser()->id;
         $this->prepare();
         $data = $this->data;
         $data['comments'] = '[]';
@@ -85,7 +85,7 @@ class Quiz implements JsonSerializable {
 
     public function delete($free=0) {
         if(!$this->id) throw new QuizException("ID de questionnaire invalide.");
-        if($this->approved && !GEHGen::getLoggedUser()->isAdmin()) throw new QuizException("Vous n'êtes pas autorisé à supprimer ce questionnaire.");
+        if($this->approved && !SYS::getLoggedUser()->isAdmin()) throw new QuizException("Vous n'êtes pas autorisé à supprimer ce questionnaire.");
         if($free && $this->approved) {
             if(($qids = $this->getQuestionIds())) {
                 DB::exec('UPDATE questions SET updated = updated, lastused = "0000-00-00 00:00:00" WHERE id IN ('.join(',',$qids).')');
@@ -145,7 +145,7 @@ class Quiz implements JsonSerializable {
     private function fillCategories() {
         foreach($this->sections as $section) {
             $q = 0;
-            $categories = GEHGen::getRandCategories($section->theme_id, $section->block_number * $section->question_number);
+            $categories = SYS::getRandCategories($section->theme_id, $section->block_number * $section->question_number);
             foreach($section->blocks as $block) {
                 foreach($block->questions as $question) {
                     if(!$section->theme_id || $section->new_questions) $question->category_id = 0;
@@ -177,7 +177,7 @@ class Quiz implements JsonSerializable {
             if($section->new_questions) continue;
             foreach($section->blocks as $block) {
                 foreach($block->questions as $question) {
-                    if(!$quest = GEHGen::pickQuestion($question->filters)) continue;
+                    if(!$quest = SYS::pickQuestion($question->filters)) continue;
                     $question->id = $quest->id;
                 }
             }
@@ -191,7 +191,7 @@ class Quiz implements JsonSerializable {
             foreach($section->blocks as $block) {
                 foreach($block->questions as $question) {
                     if($question->id) continue;
-                    if(!$quest = GEHGen::createEmptyQuestion($question->filters)) continue;
+                    if(!$quest = SYS::createEmptyQuestion($question->filters)) continue;
                     $question->id = $quest->id;
                 }
             }
@@ -241,7 +241,7 @@ class Quiz implements JsonSerializable {
         foreach($this->getIndexedQuestions() as $question)
             if($question->approve)
                 throw new QuizException("Impossible de terminer le questionnaire. Des questions sont toujours en attente d'approbation.");
-        GEHGen::sendMessage([
+        SYS::sendMessage([
             'user_id' => -1,
             'subject' => 'Le questionnaire "'.$this->name.'" est en attente d\'approbation.',
             'body' => '<a href="'.$root.'questionnaires/modifier?id='.$this->id.'">'.$this->name.'</a>',
@@ -259,7 +259,7 @@ class Quiz implements JsonSerializable {
                 throw new QuizException("Impossible de terminer le questionnaire. Des questions sont toujours en approbation.");
         }
         if(!empty($qids)) DB::exec('UPDATE questions SET hidden = 0, locked = 0, updated = updated, lastused = CURRENT_TIMESTAMP WHERE id IN ('.join(',', $qids).')');
-        GEHGen::sendMessage([
+        SYS::sendMessage([
             'user_id' => $this->user_id,
             'subject' => 'Votre questionnaire "'.$this->name.'" a été approuvé.',
             'body' => 'Bravo!  👏',
@@ -273,12 +273,12 @@ class Quiz implements JsonSerializable {
 
     public function disapprove($comment) {
         $this->data['comments'][] = [
-            'user_id' => GEHGen::getLoggedUser()->id,
+            'user_id' => SYS::getLoggedUser()->id,
             'published' => date('Y-m-d H:i:i'),
             'comment' => strip_tags($comment, '<b><i><u><sub><sup><p><div><h3><h4><em><br>'),
         ];
-        GEHGen::sendMessage([
-            'from_id' => GEHGen::getLoggedUser()->id,
+        SYS::sendMessage([
+            'from_id' => SYS::getLoggedUser()->id,
             'user_id' => $this->user_id,
             'subject' => 'Votre questionnaire "'.$this->name.'" a été rejeté.',
             'body' => $comment,
@@ -291,7 +291,7 @@ class Quiz implements JsonSerializable {
 
     public function newQuestion($data){
         $question = $this->data['sections'][$data->section_idx]->blocks[$data->block_idx]->questions[$data->question_idx];
-        $newquestion = GEHGen::createEmptyQuestion($question->filters);
+        $newquestion = SYS::createEmptyQuestion($question->filters);
         DB::exec('UPDATE questions SET locked = 0, updated = updated WHERE id = '.$question->id);
         $question->id = $newquestion->id;
         $this->save();
@@ -301,7 +301,7 @@ class Quiz implements JsonSerializable {
 
     public function swapQuestion($data) {
         $question = $this->data['sections'][$data->section_idx]->blocks[$data->block_idx]->questions[$data->question_idx];
-        if(!$newquestion = GEHGen::pickQuestion($question->filters)) throw new QuizException("Impossible d'échanger la question pour une nouvelle. Il n'y a plus de questions disponible pour cette catégorie.");
+        if(!$newquestion = SYS::pickQuestion($question->filters)) throw new QuizException("Impossible d'échanger la question pour une nouvelle. Il n'y a plus de questions disponible pour cette catégorie.");
         DB::exec('UPDATE questions SET locked = 0, updated = updated WHERE id = '.$question->id);
         $question->id = $newquestion->id;
         $this->save();

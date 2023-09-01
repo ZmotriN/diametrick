@@ -257,7 +257,7 @@ class GEHGen {
 
 
     public static function createFilteredQuestionsQuery($filters) {
-        if(!$user = GEHGen::getLoggedUser()) throw new GEHGenException("Échec de connexion");
+        if(!$user = SYS::getLoggedUser()) throw new GEHGenException("Échec de connexion");
 
         $tables = [];
         $where = ['questions.hidden = 0'];

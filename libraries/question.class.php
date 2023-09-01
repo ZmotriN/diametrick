@@ -102,7 +102,7 @@ class Question implements JsonSerializable {
 
 
     public function save() {
-        if(!$user = GEHGen::getLoggedUser()) throw new QuestionException("Utilisateur introuvable.");
+        if(!$user = SYS::getLoggedUser()) throw new QuestionException("Utilisateur introuvable.");
         if(!in_array($user->role_slug, ['dev','admin'])) $this->approve = 1;
         $this->question = strip_tags(str_replace('</p>',' </p>',$this->question), '<b><i><u><sub><sup>');
         $this->answer = strip_tags(str_replace('</p>',' </p>',$this->answer), '<b><i><u><sub><sup>');
@@ -193,7 +193,7 @@ class Question implements JsonSerializable {
     public function approve() {
         if(!DB::exec("UPDATE questions SET approve = 0, updated = updated WHERE id = ".$this->id)) throw new QuestionException("Impossible d'approuver la question.");
         if(!DB::query('SELECT COUNT(*) FROM questions WHERE hidden = 0 AND approve = 1 AND user_id = '.$this->user_id, true, true)) {
-            GEHGen::sendMessage([
+            SYS::sendMessage([
                 'user_id' => $this->user_id,
                 'subject' => 'Toutes vos questions ont été approuvées.',
                 'body' => 'Super! 👍',

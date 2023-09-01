@@ -95,7 +95,7 @@ class User {
             $data['body'] .= $parent->body;
             $data['body'] .= '</div>';
         }
-        GEHGen::sendMessage($data);
+        SYS::sendMessage($data);
         return $this;
     }
 

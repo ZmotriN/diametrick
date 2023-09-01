@@ -19,7 +19,7 @@ if($this->isPost()) {
     }
 }
 
-$roles = GEHGen::getRoles();
+$roles = SYS::getRoles();
 ?>
 
 <div class="back"><a href="javascript:history.back()">< Retour</a></div>

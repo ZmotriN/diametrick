@@ -4,10 +4,10 @@ if($this->isPost()) {
     if(empty($data->confirm)) $this->outjson(['success' => false, 'errmsg' => "Argument invalide."]);
     if(empty($data->name)) $this->outjson(['success' => false, 'errmsg' => "Argument invalide."]);
     if(empty($data->email)) $this->outjson(['success' => false, 'errmsg' => "Argument invalide."]);
-    if(!GEHGen::getLoggedUser()->verifyPassword($data->confirm)) $this->outjson(['success' => false, 'errmsg' => "Mot de passe invalide."]);
+    if(!SYS::getLoggedUser()->verifyPassword($data->confirm)) $this->outjson(['success' => false, 'errmsg' => "Mot de passe invalide."]);
     try {
         $user = [
-            'id' => GEHGen::getLoggedUser()->id,
+            'id' => SYS::getLoggedUser()->id,
             'name' => $data->name,
             'email' => $data->email
         ];
@@ -19,7 +19,7 @@ if($this->isPost()) {
     }
 }
 
-if(!$user = GEHGen::getLoggedUser()) return $this->e404();
+if(!$user = SYS::getLoggedUser()) return $this->e404();
 ?>
 
 <div class="back"><a href="javascript:history.back()">< Retour</a></div>

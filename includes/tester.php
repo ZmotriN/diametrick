@@ -1,8 +1,8 @@
 <?php
 
 try {
-    // GEHGen::sendMessage([
-    //     // 'user_id' => GEHGen::getLoggedUser()->id,
+    // SYS::sendMessage([
+    //     // 'user_id' => SYS::getLoggedUser()->id,
     //     'user_id' => 10,
     //     'subject' => 'Sujet test',
     //     'body' => 'test ALLO!',

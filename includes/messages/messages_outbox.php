@@ -4,19 +4,19 @@ if($this->isPost()) {
     if(empty($data->action)) $this->outjson(['success' => false, 'errmsg' => "Argument invalide."]);
     try {
         if($data->action == 'send') {
-            GEHGen::getLoggedUser()->sendMessage((array)$data);
+            SYS::getLoggedUser()->sendMessage((array)$data);
             $this->outjson(['success' => true, 'data' => $data]);
         } elseif($data->action == 'reply') {
-            GEHGen::getLoggedUser()->sendMessage((array)$data);
+            SYS::getLoggedUser()->sendMessage((array)$data);
             $this->outjson(['success' => true, 'data' => $data]);
         } else $this->outjson(['success' => false, 'errmsg' => 'Action invalide.']);
     } catch(Exception $e) {
         $this->outjson(['success' => false, 'errmsg' => $e->getMessage()]);
     }
 }
-$my_id = GEHGen::getLoggedUser()->id;
-foreach(GEHGen::getUsers('name ASC') as $user) if($user->id != $my_id) $users[] = $user;
-foreach(GEHGen::getLoggedUser()->getSentMessages() as $message) {
+$my_id = SYS::getLoggedUser()->id;
+foreach(SYS::getUsers('name ASC') as $user) if($user->id != $my_id) $users[] = $user;
+foreach(SYS::getLoggedUser()->getSentMessages() as $message) {
     // $message->sent = dateToFrench($message->sent ,"l j F Y H:i");
     $messages[] = $message;
 }
@@ -63,7 +63,7 @@ $params['messages'] = $messages ?? [];
                                 <?php foreach($users as $user): ?>
                                     <option value="<?php echo $user->id?>"><?php echo $user->name?></option>
                                 <?php endforeach;?>
-                                <?php if(GEHGen::getLoggedUser()->isSuperAdmin()): ?>
+                                <?php if(SYS::getLoggedUser()->isSuperAdmin()): ?>
                                     <option value="0">--- Tous les utilisateurs ---</option>
                                 <?php endif;?>
                             </select>

@@ -14,7 +14,7 @@ if($this->isPost()) {
     } else $this->outjson(['success' => false, 'errmsg' => 'Action invalide.']);
 }
 
-$page = GEHGen::getPageUsers(getPageParam(), 'name ASC');
+$page = SYS::getPageUsers(getPageParam(), 'name ASC');
 ?>
 
 <button class="list_button add">Ajouter un utilisateur +</button>

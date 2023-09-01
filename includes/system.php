@@ -5,7 +5,7 @@ if($this->isPost()) {
     try {
         if($data->action == 'backupdatabase') {
             sleep(1);
-            $file = GEHGen::backupDatabase();
+            $file = SYS::backupDatabase();
             $this->outjson(['success' => true, 'file' => pathinfo($file, PATHINFO_BASENAME), 'url' => $this->root.'systeme?file='.pathinfo($file, PATHINFO_BASENAME)]);
             
         } else $this->outjson(['success' => false, 'errmsg' => 'Action invalide.']);
@@ -16,7 +16,7 @@ if($this->isPost()) {
 
 if(!empty($_GET['file'])) {
     try {
-        GEHGen::downloadFile($_GET['file']);
+        SYS::downloadFile($_GET['file']);
     } catch(Exception $e) {
         $this->e404();
     }

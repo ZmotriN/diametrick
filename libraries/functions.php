@@ -18,13 +18,13 @@ function _var_dump($val) {
 }
 
 function devprint($obj) {
-    if(GEHGen::getLoggedUser()->isDev()) {
+    if(SYS::getLoggedUser()->isDev()) {
         _print_r($obj);
     }
 }
 
 function devdump($obj) {
-    if(GEHGen::getLoggedUser()->isDev()) {
+    if(SYS::getLoggedUser()->isDev()) {
         _var_dump($obj);
     }
 }

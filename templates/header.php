@@ -1,7 +1,7 @@
 <?php
 $mailclass = ['mail'];
 if($this->page->path == 'messages' || $this->page->path == 'messages/envoyes') $mailclass[] = 'inside';
-if(GEHGen::getLoggedUser()->hasUnreadMessages()) $mailclass[] = 'new';
+if(SYS::getLoggedUser()->hasUnreadMessages()) $mailclass[] = 'new';
 $lightmode = !empty($_COOKIE['lightmode']) && $_COOKIE['lightmode'] == 'true';
 ?><!DOCTYPE html>
 <html lang="fr-ca">

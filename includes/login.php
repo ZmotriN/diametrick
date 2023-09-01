@@ -4,7 +4,7 @@ if($this->isPost()) {
     if(empty($data->email)) $this->outjson(['success' => false, 'errmsg' => "Courriel invalide."]);
     if(empty($data->password)) $this->outjson(['success' => false, 'errmsg' => "Mot de passe invalide."]);
     try {
-        GEHGen::login($data->email, $data->password);
+        SYS::login($data->email, $data->password);
         $this->outjson(['success' => true]);
     } catch(Exception $e) {
         $this->outjson(['success' => false, 'errmsg' => $e->getMessage()]);
