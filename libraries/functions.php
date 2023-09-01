@@ -1,5 +1,8 @@
 <?php
 
+const RN = "\r\n";
+const BR = "<br/>";
+
 function console($val) {
     echo '<script>var test = `' . print_r($val, true) . '`; console.log(test);</script>';
 }

@@ -19,19 +19,24 @@ class GEHGen {
     ];
 
 
+    public static function session() {
+        return PROJECT . '_user_id';
+    }
+
+
     public static function updateLastSeen() {
-        if(!empty($_SESSION['user_id'])) DB::exec('UPDATE users SET updated = updated, lastseen = CURRENT_TIMESTAMP WHERE id = '.$_SESSION['user_id']);
+        if(!empty($_SESSION[self::session()])) DB::exec('UPDATE users SET updated = updated, lastseen = CURRENT_TIMESTAMP WHERE id = '.$_SESSION[self::session()]);
     }
 
 
     public static function getLoggedUser() {
         static $user = null;
         if($user === null) {
-            if(empty($_SESSION['user_id'])) return null;
-            if(!$_SESSION['user_id']) return null;
-            $query = 'SELECT users.*, roles.slug AS role_slug, roles.name AS role_name FROM users INNER JOIN roles ON roles.id = users.role_id WHERE users.id = '.$_SESSION['user_id'].' AND users.active = 1 LIMIT 1';
+            if(empty($_SESSION[self::session()])) return null;
+            if(!$_SESSION[self::session()]) return null;
+            $query = 'SELECT users.*, roles.slug AS role_slug, roles.name AS role_name FROM users INNER JOIN roles ON roles.id = users.role_id WHERE users.id = '.$_SESSION[self::session()].' AND users.active = 1 LIMIT 1';
             if(!$user = DB::query($query, true)) {
-                unset($_SESSION['user_id']);
+                unset($_SESSION[self::session()]);
                 return null;
             } else $user = User::load($user);
         }
@@ -41,9 +46,16 @@ class GEHGen {
 
     public static function login($email, $password) {
         $query = 'SELECT users.*, roles.slug AS role_slug FROM users INNER JOIN roles ON roles.id = users.role_id WHERE users.email = "'.DB::escape($email).'" AND users.pass = "'.DB::escape(sha1($password)).'" AND users.active = 1 LIMIT 1';
-        if(!$_GLOBAL['user'] = DB::query($query, true)) throw new GEHGenException("Échec de connexion");
-        $_SESSION['user_id'] = $_GLOBAL['user']->id;
+        if(!$user = DB::query($query, true)) throw new GEHGenException("Échec de connexion");
+        $_SESSION[self::session()] = $user->id;
         return true;
+    }
+
+
+    public static function logout($root) {
+        unset($_SESSION[self::session()]);
+        header('location: '.$root.'connexion');
+        die();
     }
 
 

@@ -1,4 +1,2 @@
 <?php
-unset($_SESSION['user_id']);
-header('location: '.$this->root.'connexion');
-die();
+GEHGen::logout($this->root);

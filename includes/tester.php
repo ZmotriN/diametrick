@@ -85,11 +85,41 @@ ready(() => {
         },
     }.init();
 
-    setTimeout(() => {
-        ModalApple.show(() => {
-            console.log('patate');
-        });
-    }, 100);
+    // setTimeout(() => {
+    //     ModalApple.show(() => {
+    //         console.log('patate');
+    //     });
+    // }, 100);
     
+
+
+    // const myIterable = {
+    //     *[Symbol.iterator](n) {
+    //         for(const i = 0; i < n; i++) {
+    //             yield i;
+    //         }
+    //     },
+    // };
+
+    const arrowIterable = (n) => {
+        return {
+            *[Symbol.iterator]() {
+                for(let i = 0; i < n; i++) {
+                    yield i;
+                }
+            },
+        };
+    };
+
+    function* myIterable(n) {
+        for(let i = 0; i < n; i++) {
+            yield i;
+        }
+    }
+
+    for (const value of arrowIterable(4)) {
+        console.log(value);
+    }
+
     
 </script>

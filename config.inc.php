@@ -1,12 +1,6 @@
 <?php
-session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', true);
-date_default_timezone_set('America/Toronto');
-include('libraries/functions.php');
 
-const RN = "\r\n";
-const BR = "<br/>";
+const PROJECT     = 'diameetrick';
 
 const PROD        = true;
 const MAINTENANCE = false;
@@ -23,6 +17,12 @@ const PAGE_SIZE   = 50;
 const QUEST_TTL   = '3 years';
 
 const COMPARE_THRESHOLD = 83;
+
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', true);
+date_default_timezone_set('America/Toronto');
+include('libraries/functions.php');
 
 spl_autoload_register(function($class) {
     static $catalog = [
