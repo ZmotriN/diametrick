@@ -1,12 +1,6 @@
 <?php
 include('config.inc.php');
-
-if(MAINTENANCE) PageApp::maintenance();
-
-if(!DB::connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB, MYSQL_PORT))
-    PageApp::e500("Connexion à la base de données impossible.");
-
-GEHGen::updateLastSeen();
+include('loader.inc.php');
 
 new PageApp([
 
