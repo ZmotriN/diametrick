@@ -21,7 +21,7 @@ $lightmode = !empty($_COOKIE['lightmode']) && $_COOKIE['lightmode'] == 'true';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>>
     <link href="https://fonts.googleapis.com/css2?family=Kavoon&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $root; ?>styles/styles.css">
-    <script src="<?php echo $root; ?>jscripts/diametrick.bundle.js"></script>
+    <script src="<?php echo $root; ?>jscripts/bundle.js"></script>
     <script>const root = '<?php echo $root; ?>';</script>
     <title>Erreur 500</title>
 </head>

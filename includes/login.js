@@ -16,12 +16,12 @@ const app = {
     },
 
     submit: function() {
-        Modal.show();
+        // Modal.show();
         post({
             email: this.email.value,
             password: this.pass.value,
         }, true).then(results => {
-            Modal.hide();
+            // Modal.hide();
             if(results == undefined) {
                 this.error("Erreur inconnue");
             } else {

@@ -147,7 +147,6 @@ const post = (obj, debug=false) => {
     });
 }
 
-
 const geturl = (url, debug=false) => {
     return fetch(url)
     .then((response) => response.text())

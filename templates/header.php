@@ -15,7 +15,7 @@ $lightmode = !empty($_COOKIE['lightmode']) && $_COOKIE['lightmode'] == 'true';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $this->root; ?>styles/styles<?php echo PROD ? '.min.css' : '.css' ?>">
-    <script src="<?php echo $this->root; ?>jscripts/diametrick.bundle.js"></script>
+    <script src="<?php echo $this->root; ?>jscripts/bundle.js"></script>
     <script>const root='<?php echo $this->root; ?>';</script>
     <title><?php echo $this->page->title; ?></title>
 </head>
