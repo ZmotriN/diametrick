@@ -15,7 +15,7 @@ $lightmode = !empty($_COOKIE['lightmode']) && $_COOKIE['lightmode'] == 'true';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kavoon&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $this->root; ?>styles/styles.css">
-    <script src="<?php echo $this->root; ?>jscripts/commons.js"></script>
+    <script src="<?php echo $this->root; ?>jscripts/diametrick.bundle.js"></script>
     <script>const root = '<?php echo $this->root; ?>';</script>
     <title>Erreur 404</title>
     <style>

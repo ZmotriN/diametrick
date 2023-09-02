@@ -44,6 +44,13 @@
             "keep_fnames": false,
             "keep_classnames": false
         }
-    }
-    
+    },
+    "filewatcher.commands": [
+        {
+            "match": "jscripts\\.*",
+            "isAsync": true,
+            "cmd": "type ${workspaceRoot}\\jscripts\\*.min.js > ${workspaceRoot}\\jscripts\\diametrick.bundle.js",
+            "event": "onFileChange"
+        }
+    ]
 }
