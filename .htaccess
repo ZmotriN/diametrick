@@ -1,6 +1,6 @@
 Options +FollowSymLinks
 RewriteEngine On
-RewriteCond %{REQUEST_URI} !(\.js|\.css|\.map|\.webp|\.svg|\.ico|\.webm)$ [NC]
+RewriteCond %{REQUEST_URI} !(\.js|\.css|\.map|\.webp|\.svg|\.ico|\.webm|\.woff2)$ [NC]
 RewriteRule ^(.*)$ index.php?path=$1 [QSA]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

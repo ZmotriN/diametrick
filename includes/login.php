@@ -19,9 +19,6 @@ $lightmode = !empty($_COOKIE['lightmode']) && $_COOKIE['lightmode'] == 'true';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo $this->root; ?>favicon<?php echo $lightmode ? '_light' : ''; ?>.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo $this->root; ?>styles/styles.css">
     <script src="<?php echo $this->root; ?>jscripts/bundle.js"></script>
     <script>const root = '<?php echo $this->root; ?>';</script>
