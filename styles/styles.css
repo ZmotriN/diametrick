@@ -989,6 +989,93 @@ table.reset tr td {
   background-color: var(--background-color);
 }
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition-property: opacity visibility;
+  transition-duration: 200ms;
+}
+.modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color);
+  opacity: 0.5;
+}
+.modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+.modal-object {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.modal.show .modal-object {
+  display: block;
+}
+
+.modal-loading {
+  width: 150px;
+  height: 150px;
+  opacity: 0.3;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: var(--loading-icon);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.modal.show:has(.modal-loading) .modal-loading {
+  -webkit-animation-name: loading;
+          animation-name: loading;
+  -webkit-animation-duration: var(--modal-spin);
+          animation-duration: var(--modal-spin);
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+@-webkit-keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.modaltest {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
 .pell {
   --background-color: var(--background-gradient);
   --border-color: var(--text-shade);
