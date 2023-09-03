@@ -56,7 +56,7 @@
     background-position: center;
 }
 
-.modal.show:has(.modal-loading) .modal-loading {
+.modal.show .modal-loading {
     animation-name: loading;
     animation-duration: var(--modal-spin);
     animation-iteration-count: infinite;
@@ -69,10 +69,3 @@
 }
 
 
-
-
-.modaltest {
-    width: 100px;
-    height: 100px;
-    background-color: red;
-}

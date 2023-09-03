@@ -29,7 +29,7 @@ class SYS {
 
     public static function login($email, $password) {
         $query = 'SELECT users.*, roles.slug AS role_slug FROM users INNER JOIN roles ON roles.id = users.role_id WHERE users.email = "'.DB::escape($email).'" AND users.pass = "'.DB::escape(sha1($password)).'" AND users.active = 1 LIMIT 1';
-        if(!$user = DB::query($query, true)) throw new GEHGenException("Échec de connexion");
+        if(!$user = DB::query($query, true)) throw new SYSException("Échec de connexion");
         $_SESSION[self::session()] = $user->id;
         return true;
     }
@@ -84,13 +84,13 @@ class SYS {
 
 
     public static function backupDatabase() {
-        $tempdir = str_replace('\\','/',sys_get_temp_dir()).'/gehgen/';
-        $sqldest = $tempdir.'gehgen_'.date('YmdHis').'.sql';
+        $tempdir = str_replace('\\','/',sys_get_temp_dir()).'/'.PROJECT.'/';
+        $sqldest = $tempdir.PROJECT.'_'.date('YmdHis').'.sql';
         if(!is_dir($tempdir))
             if(!@mkdir($tempdir))
-                throw new GEHGenException("Impossible de créer le fichier temporaire.");
-        if(!DB::dump($sqldest)) throw new GEHGenException("Impossible de sauvegarder la base de données.");
-        if(!is_file($sqldest) || !filesize($sqldest)) throw new GEHGenException("Sauvegarde de base de données invalide.");
+                throw new SYSException("Impossible de créer le fichier temporaire.");
+        if(!DB::dump($sqldest)) throw new SYSException("Impossible de sauvegarder la base de données.");
+        if(!is_file($sqldest) || !filesize($sqldest)) throw new SYSException("Sauvegarde de base de données invalide.");
         $database = gzencode(file_get_contents($sqldest),9);
         file_put_contents(($gzdest = $sqldest.'.gz'), $database);
         unlink($sqldest);
@@ -99,8 +99,8 @@ class SYS {
 
 
     public static function downloadFile($file) {
-        if(!$tempfile = realpath(str_replace('\\','/',sys_get_temp_dir()).'/gehgen/'.pathinfo($file, PATHINFO_BASENAME)))
-            throw new GEHGenException("Fichier invalide.");
+        if(!$tempfile = realpath(str_replace('\\','/',sys_get_temp_dir()).'/'.PROJECT.'/'.pathinfo($file, PATHINFO_BASENAME)))
+            throw new SYSException("Fichier invalide.");
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header("Content-Transfer-Encoding: Binary");
@@ -116,4 +116,4 @@ class SYS {
 
  }
 
-class GEHGenException extends Exception { }
+class SYSException extends Exception { }

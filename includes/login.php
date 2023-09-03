@@ -57,9 +57,6 @@ $lightmode = !empty($_COOKIE['lightmode']) && $_COOKIE['lightmode'] == 'true';
             </form>
         </div>
     </div>
-    <div id="modal" class="modal">
-        <div class="modal__loading"></div>
-    </div>
     <script><?php $this->includejs('login'); ?>app.init();</script>
 </body>
 </html>

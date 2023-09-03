@@ -56,11 +56,11 @@
 
 
     .logo {
-        filter: brightness(100%) invert(0);
+        filter: invert(100%);
     }
 
     div.login_container::before {
-        filter: brightness(100%) invert(0);
+        filter: invert(100%);
     }
 
 }

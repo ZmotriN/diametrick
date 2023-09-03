@@ -22,6 +22,10 @@ class Modal {
 }
 
 
+class ModalOpt extends Modal {
+
+}
+
 class ModalLoading extends Modal {
 
     constructor() {
@@ -31,3 +35,9 @@ class ModalLoading extends Modal {
     }
 
 }
+
+
+
+const ModalBox = {
+
+};

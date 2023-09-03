@@ -1,11 +1,11 @@
 <?php
-
 foreach($this->pages as $page) {
     if(!$page->menu) continue;
     $pages[] = $page;
 }
 if(empty($pages)) return;
 ?>
+
 <ul>
     <?php foreach($pages as $page): ?>
         <?php if($page->public || ($this->user && in_array($this->user->role_slug, $page->access))): ?>
@@ -17,6 +17,5 @@ if(empty($pages)) return;
     <?php endforeach; ?>
     <li><div class="switch"><div class="switch__pin"></div></div></li>
 </ul>
-
 
 <script><?php include('lightswitch'.(PROD ? '.min' : '').'.js'); ?>lightswitch.init();</script>
