@@ -49,7 +49,7 @@
         {
             "match": "jscripts\\.*",
             "isAsync": true,
-            "cmd": "type ${workspaceRoot}\\jscripts\\*.min.js > ${workspaceRoot}\\jscripts\\bundle.js",
+            "cmd": "type ${workspaceRoot}\\jscripts\\*.min.js > ${workspaceRoot}\\jscripts\\bundle.js 2> null",
             "event": "onFileChange"
         }
     ]

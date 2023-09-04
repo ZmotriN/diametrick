@@ -26,6 +26,13 @@ const click = (elm, evt) => {
 }
 
 
+const create = (tag, classname=null) => {
+    const elm = document.createElement(tag);
+    if(classname) elm.className = classname;
+    return elm;
+}
+
+
 const redirect = (path='') => {
     document.location.href = root + path;
 }

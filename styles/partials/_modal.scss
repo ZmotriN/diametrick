@@ -34,6 +34,9 @@
         right: 0;
         bottom: 0;
         margin: auto;
+        width: 50vw;
+        height: 50vh;
+        // object-fit: contain;
         // opacity: var(--modal-opacity);
     }
 
@@ -69,3 +72,10 @@
 }
 
 
+
+
+.modaltest {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
