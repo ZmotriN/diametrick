@@ -1023,9 +1023,79 @@ table.reset tr td {
   margin: auto;
   width: 50vw;
   height: 50vh;
+  opacity: var(--modal-opacity);
 }
-.modal.show .modal-object {
+.modal-form {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: var(--modal-opacity);
+}
+.modal-form table.form {
+  background-color: var(--background-color);
+}
+.modal-alert {
+  display: none;
+  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background-color);
+  border: 3px solid var(--shadow-color);
+  box-shadow: 0 0 20px var(--shadow-color);
+  padding: 16px;
+  font-size: 1.25em;
+  line-height: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  max-width: 60vw;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  opacity: var(--modal-opacity);
+}
+.modal-alert::after {
+  content: "❗";
+  position: absolute;
   display: block;
+  left: -27px;
+  top: -27px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 50%;
+  font-size: 24px;
+  text-align: center;
+  color: var(--alert-color);
+  background-color: var(--background-color);
+  border: 4px solid var(--highlight);
+}
+.modal-alert.modal-error::after {
+  content: "☠";
+}
+.modal-alert.modal-warning::after {
+  content: "⚠";
+}
+.modal-alert.modal-bravo::after {
+  content: "👏";
+}
+.modal-alert.modal-thumbsup::after {
+  content: "👍";
+}
+.modal-anim {
+  display: none;
+  position: absolute;
+}
+.modal.show .modal-object, .modal.show .modal-form, .modal.show .modal-anim, .modal.show .modal-alert {
+  display: block;
+}
+
+.modal:has(.modal-anim)::before {
+  content: none;
 }
 
 .modal-loading {
@@ -1068,6 +1138,48 @@ table.reset tr td {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+.modal-plane {
+  left: -30vmin;
+  width: 30vmin;
+  height: 30vmin;
+  background-image: var(--paper-plane);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.modal.show .modal-plane {
+  -webkit-animation-name: plane;
+          animation-name: plane;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-timing-function: cubic-bezier(0.95, 0.16, 0.83, 0.67);
+          animation-timing-function: cubic-bezier(0.95, 0.16, 0.83, 0.67);
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-delay: -600ms;
+          animation-delay: -600ms;
+}
+
+@-webkit-keyframes plane {
+  from {
+    transform: translate(-100%, 100vh);
+  }
+  to {
+    transform: translate(calc(100vw + 100%), -50%);
+  }
+}
+
+@keyframes plane {
+  from {
+    transform: translate(-100%, 100vh);
+  }
+  to {
+    transform: translate(calc(100vw + 100%), -50%);
   }
 }
 .modaltest {

@@ -110,7 +110,7 @@ const app = {
             data.action = 'send'
             post(data);
             MessageForm.hide();
-            ModalPlane.show(() => {
+            ModalBox.plane(() => {
                 location.reload();
             });
         });

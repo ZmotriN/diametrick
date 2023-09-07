@@ -146,7 +146,7 @@ const app = {
             data.action = 'send'
             post(data);
             MessageForm.hide();
-            ModalPlane.show();
+            ModalBox.plane();
         });
     },
 
@@ -163,7 +163,7 @@ const app = {
             data.action = 'reply'
             post(data);
             MessageForm.hide();
-            ModalPlane.show();
+            ModalBox.plane();
         });
     }
 

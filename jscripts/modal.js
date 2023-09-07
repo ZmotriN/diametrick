@@ -11,7 +11,10 @@ class Modal {
     }
 
     show() {
-        this.cont.classList.add('show');
+        setTimeout(() => {
+            this.cont.classList.add('show');
+        }, 1);
+        
     }
 
     hide() {
@@ -57,6 +60,54 @@ class ModalForm extends ModalOpt {
 }
 
 
+class ModalAnim extends Modal {
+    
+    ttl = null;
+
+    constructor(obj, ttl=5000) {
+        super(obj);
+        this.ttl = ttl;
+    }
+
+    show(clb=null) {
+        super.show();
+        setTimeout(() => {
+            this.hide();
+            if(clb) clb();
+        }, this.ttl);
+    }
+
+}
+
+
+ class ModalAlert extends ModalOpt {
+    
+    modal = null;
+
+    constructor(type='info') {
+        super(create('div', 'modal-alert modal-'+type));
+        bind(this.obj, 'mousedown', (evt) => {
+            this.hide();
+        });
+    }
+
+    show(str) {
+        this.obj.innerHTML = str;
+        super.show();
+    }
+
+ }
+
+
+class ModalPlane extends ModalAnim {
+    
+    constructor() {
+        super(create('div', 'modal-anim modal-plane'), 1600);
+    }
+
+}
+
+
 class ModalLoading extends Modal {
 
     constructor() {
@@ -68,5 +119,73 @@ class ModalLoading extends Modal {
 
 
 const ModalBox = {
+
+    _loading: null,
+    _modalplane: null,
+    _modalinfo: null,
+    _modalerror: null,
+    _modalwarning: null,
+    _modalthumbsup: null,
+    _modalbravo: null,
+
+    get loading() {
+        if(!this._loading) this._loading = new ModalLoading();
+        return this._loading;
+    },
+
+    get modalplane() {
+        if(!this._modalplane) this._modalplane = new ModalPlane();
+        return this._modalplane;
+    },
+
+    get modalinfo() {
+        if(!this._modalinfo) this._modalinfo = new ModalAlert('info');
+        return this._modalinfo;
+    },
+
+    get modalerror() {
+        if(!this._modalerror) this._modalerror = new ModalAlert('error');
+        return this._modalerror;
+    },
+
+    get modalwarning() {
+        if(!this._modalwarning) this._modalwarning = new ModalAlert('warning');
+        return this._modalwarning;
+    },
+
+    get modalthumbsup() {
+        if(!this._modalthumbsup) this._modalthumbsup = new ModalAlert('thumbsup');
+        return this._modalthumbsup;
+    },
+
+    get modalbravo() {
+        if(!this._modalbravo) this._modalbravo = new ModalAlert('bravo');
+        return this._modalbravo;
+    },
+
+
+    plane(clb=null) {
+        this.modalplane.show(clb);
+    },
+
+    info(msg) {
+        this.modalinfo.show(msg);
+    },
+
+    error(msg) {
+        this.modalerror.show(msg);
+    },
+
+    warning(msg) {
+        this.modalwarning.show(msg);
+    },
+
+    bravo(msg) {
+        this.modalbravo.show(msg);
+    },
+
+    thumbsup(msg) {
+        this.modalthumbsup.show(msg);
+    },
 
 };
