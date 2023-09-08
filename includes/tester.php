@@ -7,8 +7,21 @@
 
 <div class="modal-object modaltest" id="modal-test">asdf</div>
 
-
 <script>
+
+// const mpass = new ModalPass();
+
+setTimeout(() => {
+    // mpass.show((pass) => {
+    //     console.log(pass);
+    // });
+
+    ModalBox.pass((pass) => {
+        console.log(pass);
+    });
+
+}, 500);
+
 
 // const modalTest = new Modal('#modal-test');
 // setTimeout(() => {
@@ -28,18 +41,9 @@
 //     loading.hide();    
 // }, 4000);
 
-setTimeout(() => {
-    // ModalBox.plane(() => {
-    //     console.log('PLANE END');
-    // });
-
-    // const malert = new ModalAlert('thumbsup');
-    // malert.show('bravo');
-
-    ModalBox.bravo('Grosse Info!');
-
-
-}, 500);
+// setTimeout(() => {
+//     ModalBox.info('Grosse Info!');
+// }, 500);
 
 
 

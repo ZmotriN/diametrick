@@ -164,3 +164,8 @@ const geturl = (url, debug=false) => {
     .catch(error => console.warn(error));
 }
 
+HTMLElement.prototype.create = function(tag, classname=null) {
+    const elm = create(tag, classname);
+    this.append(elm);
+    return elm;
+}

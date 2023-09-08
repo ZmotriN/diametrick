@@ -1035,8 +1035,10 @@ table.reset tr td {
 }
 .modal-form table.form {
   background-color: var(--background-color);
+  border: 3px solid var(--shadow-color);
+  box-shadow: 0 0 20px var(--shadow-color);
 }
-.modal-alert {
+.modal-box, .modal-alert {
   display: none;
   z-index: 9999;
   position: absolute;
@@ -1058,8 +1060,7 @@ table.reset tr td {
           user-select: none;
   opacity: var(--modal-opacity);
 }
-.modal-alert::after {
-  content: "❗";
+.modal-box::after, .modal-alert::after {
   position: absolute;
   display: block;
   left: -27px;
@@ -1074,23 +1075,29 @@ table.reset tr td {
   background-color: var(--background-color);
   border: 4px solid var(--highlight);
 }
-.modal-alert.modal-error::after {
+.modal-box.modal-info::after, .modal-alert.modal-info::after {
+  content: "❗";
+}
+.modal-box.modal-error::after, .modal-alert.modal-error::after {
   content: "☠";
 }
-.modal-alert.modal-warning::after {
+.modal-box.modal-warning::after, .modal-alert.modal-warning::after {
   content: "⚠";
 }
-.modal-alert.modal-bravo::after {
+.modal-box.modal-bravo::after, .modal-alert.modal-bravo::after {
   content: "👏";
 }
-.modal-alert.modal-thumbsup::after {
+.modal-box.modal-thumbsup::after, .modal-alert.modal-thumbsup::after {
   content: "👍";
+}
+.modal-box.modal-pass::after, .modal-alert.modal-pass::after {
+  content: "🔒";
 }
 .modal-anim {
   display: none;
   position: absolute;
 }
-.modal.show .modal-object, .modal.show .modal-form, .modal.show .modal-anim, .modal.show .modal-alert {
+.modal.show .modal-object, .modal.show .modal-form, .modal.show .modal-anim, .modal.show .modal-alert, .modal.show .modal-box {
   display: block;
 }
 
@@ -1182,6 +1189,19 @@ table.reset tr td {
     transform: translate(calc(100vw + 100%), -50%);
   }
 }
+.modal-pass input[type=password] {
+  font-size: 1.25em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+.modal-pass input[type=submit] {
+  width: 100%;
+  font-size: 1em;
+  height: 38px;
+}
+
 .modaltest {
   width: 100px;
   height: 100px;

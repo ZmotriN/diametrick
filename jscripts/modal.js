@@ -99,6 +99,52 @@ class ModalAnim extends Modal {
  }
 
 
+ class ModalPass extends ModalOpt {
+
+    pass = null;
+    clb = null;
+
+    constructor() {
+        const obj = create('div', 'modal-box modal-pass');
+        obj.create('div').innerHTML = "Veuillez entrer votre mot de passe:";
+
+        const form = obj.create('form');
+        const pass = form.create('div').create('input');
+        const submit = form.create('div').create('input');
+
+        pass.type = 'password';
+        pass.name = 'password';
+        pass.required = true;
+
+        submit.type = 'submit';
+        submit.value = 'Confirmer';
+
+        super(obj);
+        this.pass = pass;
+
+        bind(form, 'submit', (evt) => {
+            evt.preventDefault();
+            this.submit();
+        });
+    }
+
+    show(clb=null) {
+        this.clb = clb;
+        this.pass.value = '';
+        super.show();
+        setTimeout(() => {
+            this.pass.focus();
+        }, 200);
+    }
+
+    submit() {
+        this.hide();
+        if(this.clb) this.clb(this.pass.value);
+    }
+
+ }
+
+
 class ModalPlane extends ModalAnim {
     
     constructor() {
@@ -127,6 +173,7 @@ const ModalBox = {
     _modalwarning: null,
     _modalthumbsup: null,
     _modalbravo: null,
+    _modalpass: null,
 
     get loading() {
         if(!this._loading) this._loading = new ModalLoading();
@@ -163,6 +210,11 @@ const ModalBox = {
         return this._modalbravo;
     },
 
+    get modalpass() {
+        if(!this._modalpass) this._modalpass = new ModalPass();
+        return this._modalpass;
+    },
+
 
     plane(clb=null) {
         this.modalplane.show(clb);
@@ -187,5 +239,9 @@ const ModalBox = {
     thumbsup(msg) {
         this.modalthumbsup.show(msg);
     },
+
+    pass(clb=null) {
+        this.modalpass.show(clb);
+    }
 
 };
